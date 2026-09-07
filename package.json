@@ -1,0 +1,24 @@
+{
+  "name": "focus-sanctuary-3d-max",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Focus Sanctuary 3D MAX EDITION - CHRONO CHRYSALIS. A Pomodoro timer as a floating liquid-chrome / prism-glass sculpture (Vite + TypeScript + Three.js + GSAP).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "gsap": "3.15.0",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@types/three": "0.185.4",
+    "typescript": "5.9.3",
+    "vite": "6.4.3",
+    "vitest": "3.2.7"
+  }
+}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Scene dev — Focus Sanctuary</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #050608; overflow: hidden; }
+      body { background: radial-gradient(120% 80% at 62% 45%, #101116 0%, #07080b 55%, #050608 100%); }
+      #gl { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+      #hud { position: fixed; left: 12px; bottom: 10px; font: 11px/1.5 ui-monospace, Menlo, Consolas, monospace; color: #9aa0aa;
+             letter-spacing: 0.08em; pointer-events: none; white-space: pre; z-index: 2; }
+      #hud b { color: #D9FF62; font-weight: 500; }
+      #help { position: fixed; right: 12px; top: 10px; font: 10px/1.6 ui-monospace, Menlo, Consolas, monospace; color: #5c626e;
+              letter-spacing: 0.08em; pointer-events: none; text-align: right; z-index: 2; }
+    </style>
+  </head>
+  <body>
+    <canvas id="gl"></canvas>
+    <div id="hud"></div>
+    <div id="help">1-4 POSE · G GREY · W WIRE · SPACE FREEZE · P PAUSE OVERLAY<br />?pose=idle|focus|shortBreak|longBreak ?open= ?progress= ?twist= ?still=1 ?t=</div>
+    <script type="module" src="/src/dev/scene-dev.ts"></script>
+  </body>
+</html>

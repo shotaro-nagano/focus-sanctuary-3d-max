@@ -1,0 +1,14 @@
+node_modules
+dist
+.vercel
+.DS_Store
+*.log
+
+# QA working files (contact sheets / diagnostic frames). The deliverable stills and
+# demo videos in captures/ itself are committed.
+captures/qa
+captures/_tmp*
+tools/__pycache__
+
+# local npm network workaround (long fetch timeouts on this machine)
+.npmrc

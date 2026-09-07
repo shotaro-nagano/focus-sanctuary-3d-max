@@ -1,0 +1,16 @@
+/* Instrument Serif (SIL OFL 1.1, © Rodrigo Fuenzalida / Jordan Egstad) - bundled in /public/fonts.
+   The variable display / mono faces come from the @fontsource packages (imported in src/ui/App.ts). */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/instrument-serif-latin-400-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/instrument-serif-latin-400-normal.woff') format('woff');
+}

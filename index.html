@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" class="layout-desktop">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050608" />
+    <title>Focus Sanctuary — CHRONO CHRYSALIS</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050608'/%3E%3Cpath d='M16 4c5 0 8 6 8 12s-3 12-8 12S8 22 8 16 11 4 16 4z' fill='none' stroke='%23dce0e6' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23d9ff62'/%3E%3C/svg%3E" />
+    <meta name="description" content="Focus Sanctuary 3D MAX EDITION. A Pomodoro timer held inside a floating sculpture of liquid chrome and prism glass." />
+    <!-- critical: never show a white page while the stylesheet / modules load (dev server included) -->
+    <style>
+      html { background: #050608; color: #f0f2f5; }
+      body { margin: 0; background: #050608; }
+      .app { visibility: hidden; }
+      .app.is-ready { visibility: visible; }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app">
+      <!-- L0: typography BEHIND the WebGL canvas (the sculpture occludes it in real depth order) -->
+      <div class="type-back" id="type-back" aria-hidden="true">
+        <h1 class="word word-focus" id="word-focus" data-text="FOCUS">FOCUS</h1>
+      </div>
+
+      <!-- L1: WebGL stage -->
+      <div class="stage" id="stage">
+        <canvas id="gl" class="gl"></canvas>
+      </div>
+
+      <!-- L2: typography IN FRONT of the canvas -->
+      <div class="type-front" id="type-front" aria-hidden="true">
+        <div class="word word-sanctuary" id="word-sanctuary" data-text="SANCTUARY">SANCTUARY</div>
+        <p class="tagline" id="tagline">a cocoon that encloses time</p>
+        <div class="micro micro-tl" id="micro-tl">CHRONO CHRYSALIS — 3D MAX EDITION</div>
+        <div class="micro micro-tr" id="micro-tr">SEAM 05 / TWIST 0.15</div>
+        <div class="micro micro-bl" id="micro-bl">ORBIT C — 0%</div>
+        <div class="micro micro-br" id="micro-br">1440 × 900</div>
+      </div>
+
+      <!-- floating projected timer (large, may be partially occluded by design) -->
+      <div class="timer-float" id="timer-float" aria-hidden="true">
+        <span class="timer-digits" id="timer-float-digits">25:00</span>
+      </div>
+
+      <!-- SESSION COMPLETE banner (M10) -->
+      <div class="complete-banner" id="complete-banner" aria-live="polite">
+        <span class="complete-line" id="complete-line-1">SESSION</span>
+        <span class="complete-line" id="complete-line-2">COMPLETE</span>
+      </div>
+
+      <!-- L3: console (the small viewing console; always readable exact readout) -->
+      <section class="console" id="console" data-ui aria-label="Timer console">
+        <div class="console-readout">
+          <div class="readout-mode" id="status-line">FOCUS · READY</div>
+          <div class="readout-time" id="timer-exact" aria-live="off">25:00</div>
+          <div class="readout-session" id="session-label">SESSION 01 / 04</div>
+        </div>
+
+        <div class="console-modes" role="group" aria-label="Mode">
+          <button class="btn btn-mode is-active" data-mode="focus" data-ui type="button">FOCUS <small>25</small></button>
+          <button class="btn btn-mode" data-mode="short" data-ui type="button">SHORT <small>05</small></button>
+          <button class="btn btn-mode" data-mode="long" data-ui type="button">LONG <small>15</small></button>
+        </div>
+
+        <div class="console-actions">
+          <button class="btn btn-primary" id="btn-start" data-ui type="button">START</button>
+          <button class="btn btn-ghost" id="btn-reset" data-ui type="button">RESET</button>
+          <button class="btn btn-ghost" id="btn-replay" data-ui type="button">REPLAY</button>
+        </div>
+
+        <label class="console-task" for="task-input">
+          <span class="task-label">CURRENT WORK</span>
+          <input id="task-input" data-ui type="text" maxlength="80" autocomplete="off" spellcheck="false" placeholder="what are you enclosing?" />
+        </label>
+
+        <div class="console-record" id="record">
+          <span class="record-item"><b id="today-count">0</b> <span>SESSIONS TODAY</span></span>
+          <span class="record-item"><b id="today-minutes">0</b> <span>MIN</span></span>
+        </div>
+
+        <div class="console-note" id="storage-note" hidden></div>
+      </section>
+
+      <!-- confirmation (destructive actions) -->
+      <div class="confirm" id="confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-text" hidden>
+        <div class="confirm-panel">
+          <p class="confirm-text" id="confirm-text">Discard the running session?</p>
+          <div class="confirm-actions">
+            <button class="btn btn-ghost" id="confirm-no" data-ui type="button">KEEP</button>
+            <button class="btn btn-primary" id="confirm-yes" data-ui type="button">DISCARD</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WebGL unavailable / context lost / reduced motion alternative -->
+      <div class="fallback" id="fallback" hidden>
+        <div class="fallback-inner">
+          <div class="fallback-kicker" id="fallback-kicker">3D UNAVAILABLE</div>
+          <p class="fallback-text" id="fallback-text">WebGL could not start. The timer still works.</p>
+        </div>
+      </div>
+
+      <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span><span class="cursor-label"></span></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
